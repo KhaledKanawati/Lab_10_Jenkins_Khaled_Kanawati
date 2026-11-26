@@ -1,0 +1,9 @@
+LOCAL CHECK: security
+Command: python -m bandit app.py deploy.py -f json -o reports/bandit.json
+Exit code: 0
+
+[main]	INFO	profile include tests: None
+[main]	INFO	profile exclude tests: None
+[main]	INFO	cli include tests: None
+[main]	INFO	cli exclude tests: None
+[json]	INFO	JSON output written to file: reports/bandit.json

@@ -1,0 +1,8 @@
+{
+  "application": "app.py",
+  "author": "Khaled Kanawati",
+  "sha256": "ee7b3001c27dcf617913e0c5674b29832fad0af20fd7cc23517dc0321d3b0549",
+  "build_number": "local",
+  "commit": "local",
+  "smoke_output": "Hello, World from Khaled Kanawati!"
+}

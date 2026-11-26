@@ -1,0 +1,106 @@
+// Configure Pipeline script from SCM with this exact Script Path.
+pipeline {
+    agent any
+
+    options {
+        skipDefaultCheckout(true)
+        disableConcurrentBuilds()
+        timeout(time: 15, unit: 'MINUTES')
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+    }
+
+    stages {
+        stage('Setup') {
+            steps {
+                // Start clean so old test reports cannot be mistaken for new ones.
+                deleteDir()
+                checkout scm
+                script {
+                    if (isUnix()) {
+                        sh 'python3 -m venv .venv'
+                        env.LAB_PYTHON = '.venv/bin/python'
+                    } else {
+                        bat 'python -m venv .venv'
+                        env.LAB_PYTHON = '.venv\\Scripts\\python.exe'
+                    }
+                    runPython('--version')
+                    runPython('-m pip install -r requirements.txt')
+                    runPython('-c "from pathlib import Path; Path(\'reports\').mkdir(exist_ok=True)"')
+                    runPython('-m pip freeze > reports/installed-packages.txt')
+                }
+            }
+        }
+
+        stage('Lint') {
+            steps {
+                script {
+                    runPython('-m flake8 app.py deploy.py tests run_checks.py --tee --output-file reports/flake8.txt')
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                script {
+                    runPython('-m pytest -v --junitxml=reports/junit.xml')
+                }
+            }
+        }
+
+        stage('Coverage') {
+            steps {
+                script {
+                    runPython('-m coverage run -m pytest -v')
+                    // Generate downloadable files before enforcing the threshold.
+                    runPython('-m coverage html --fail-under=0')
+                    runPython('-m coverage xml --fail-under=0')
+                    runPython('-m coverage json -o reports/coverage.json --fail-under=0')
+                    runPython('-m coverage report -m --fail-under=90')
+                }
+            }
+        }
+
+        stage('Security Scan') {
+            steps {
+                script {
+                    // Scan shipped code. Do not suppress Bandit's nonzero status.
+                    runPython('-m bandit app.py deploy.py -f json -o reports/bandit.json')
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    runPython('deploy.py')
+                    runPython('deployment/current/app.py')
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                if (fileExists('reports/junit.xml')) {
+                    junit testResults: 'reports/junit.xml'
+                }
+            }
+            archiveArtifacts artifacts: 'reports/**,deployment/current/**',
+                             allowEmptyArchive: true, fingerprint: true
+        }
+        cleanup {
+            // Archives survive this workspace cleanup on the Jenkins build page.
+            deleteDir()
+        }
+    }
+}
+
+// Direct interpreter paths avoid shell activation and the handout's source issue.
+def runPython(String arguments) {
+    if (isUnix()) {
+        sh "\"${env.LAB_PYTHON}\" ${arguments}"
+    } else {
+        bat "\"${env.LAB_PYTHON}\" ${arguments}"
+    }
+}

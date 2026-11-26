@@ -1,0 +1,5 @@
+LOCAL CHECK: deployed_app
+Command: python deployment/current/app.py
+Exit code: 0
+
+Hello, World from Khaled Kanawati!

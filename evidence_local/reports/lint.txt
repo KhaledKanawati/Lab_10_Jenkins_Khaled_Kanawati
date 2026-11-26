@@ -1,0 +1,4 @@
+LOCAL CHECK: lint
+Command: python -m flake8 app.py deploy.py tests run_checks.py
+Exit code: 0
+

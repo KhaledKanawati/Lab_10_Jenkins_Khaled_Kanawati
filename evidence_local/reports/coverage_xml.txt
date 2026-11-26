@@ -1,0 +1,5 @@
+LOCAL CHECK: coverage_xml
+Command: python -m coverage xml --fail-under=0
+Exit code: 0
+
+Wrote XML report to reports/coverage.xml

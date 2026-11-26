@@ -1,0 +1,10 @@
+LOCAL CHECK: coverage_report
+Command: python -m coverage report -m --fail-under=90
+Exit code: 0
+
+Name        Stmts   Miss Branch BrPart   Cover   Missing
+--------------------------------------------------------
+app.py          4      0      2      0 100.00%
+deploy.py      24      1      4      1  92.86%   42
+--------------------------------------------------------
+TOTAL          28      1      6      1  94.12%

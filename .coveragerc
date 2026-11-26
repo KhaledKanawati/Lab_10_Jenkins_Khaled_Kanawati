@@ -1,0 +1,15 @@
+[run]
+branch = True
+source = app,deploy
+data_file = reports/.coverage
+
+[report]
+show_missing = True
+fail_under = 90
+precision = 2
+
+[html]
+directory = reports/htmlcov
+
+[xml]
+output = reports/coverage.xml

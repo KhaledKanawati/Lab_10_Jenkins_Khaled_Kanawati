@@ -1,0 +1,134 @@
+LAB 10 REMAINING VALIDATION AND SUBMISSION
+Khaled Kanawati
+
+1. What is complete and what remains
+
+The source code, personalized unit tests, final modified Jenkinsfile, coverage
+configuration, Bandit scan, local deployment and brief report are prepared.
+Actual local Python output is saved in evidence_local/. These are local checks,
+not a Jenkins build. Jenkins Groovy/Declarative validation, SCM checkout, agent
+permissions, stage execution, publishing and cleanup still require Jenkins.
+The Linux path is prepared but has not been executed here.
+
+You may use a Jenkins server from a browser on your own laptop. Java/Jenkins
+does not need to run on the laptop. The Jenkins controller and build agent can
+be another machine. Git and Python must be available to the agent's service
+account, not just to the person signed in interactively.
+
+2. Publish the project
+
+Use the course's existing repository or Classroom destination if provided.
+Otherwise, create an empty GitHub repository using the visibility required by
+the course. Upload the CONTENTS of jenkins_project at the repository root so
+the named Jenkinsfile is at the root, without an extra jenkins_project prefix.
+No remote repository was created or pushed as part of this package.
+
+From inside jenkins_project, using your own configured Git author identity:
+
+  git init
+  git add .
+  git commit -m "Prepare Lab 10 Jenkins pipeline"
+  git branch -M main
+  git remote add origin https://github.com/YOUR_USERNAME/jenkins_project.git
+  git push -u origin main
+
+Replace the example URL with the actual repository. If origin already exists,
+check it with git remote -v instead of adding it again. For an existing course
+repository, clone it first, copy these files into its root, then commit and push.
+Do not use the example URL as your Moodle submission link.
+
+3. Prepare the Jenkins machine
+
+- Use the course Jenkins server, or an already installed supported Jenkins.
+  Follow the lab's initial unlock/admin setup only if this is a fresh server.
+- Verify Git and Pipeline plugins. This pipeline also uses the JUnit plugin.
+  Install SSH Agent as the handout requests; this local deployment does not
+  call SSH and needs no remote-server credentials. It uses built-in deleteDir
+  instead of cleanWs, so Workspace Cleanup is not needed for this Jenkinsfile.
+- The chosen agent needs Git, Python with pip and venv, writable workspace,
+  and access to the repository and Python package index. Python 3.11/3.12 is
+  recommended; the recorded local run used 3.12.14.
+- Windows: "python --version" must work for the Jenkins service account.
+  Linux/macOS: "python3 --version" must work; install the distribution's venv
+  package if Python reports that ensurepip or venv is unavailable.
+- For a private Git repository, configure Jenkins SCM credentials and select
+  them in the job. Do not put a token in the repository URL or source files.
+
+4. Configure and run the job
+
+New Item -> Python-CI-CD -> Pipeline -> OK.
+Pipeline Definition: Pipeline script from SCM.
+SCM: Git.
+Repository URL: your actual project URL.
+Credentials: select if required.
+Branch Specifier: */main (or your actual branch).
+Script Path: Jenkinsfile_Khaled_Kanawati.
+Save, then Build Now. No webhook is required for this manual lab run.
+
+The pipeline chooses the virtual-environment interpreter path using isUnix().
+It does not activate a shell environment, so it works with Windows bat and
+POSIX sh without the handout's shell-specific "source" command.
+
+Optional: use the server's Declarative Pipeline linter before building. This
+still needs access to the Jenkins server. Follow the Jenkins documentation
+listed in the report; account/token and CSRF requirements depend on the server.
+
+5. Check the actual result
+
+Expected order: Setup -> Lint -> Test -> Coverage -> Security Scan -> Deploy.
+This order is the intended behavior, not a recorded Jenkins result.
+
+- Setup: fresh checkout, fresh .venv, pinned dependencies installed.
+- Lint: no flake8 findings and exit code 0.
+- Test: seven tests pass; Jenkins displays the JUnit test result.
+- Coverage: HTML, XML and JSON generated; combined coverage is at least 90%.
+  Local reference: app.py 100%, deploy.py 92.86%, total 94.12% with branches.
+  The missing deployment entry call is executed by Deploy outside measurement.
+- Security Scan: check reports/bandit.json for an empty results list and no
+  scan errors. This scans app.py and deploy.py only, not dependency CVEs.
+- Deploy: the copied app prints "Hello, World from Khaled Kanawati!".
+  deployment/current/ contains app.py and manifest.json with a SHA256 hash,
+  smoke output, build number and commit ID.
+- Final result: SUCCESS. Inspect Console Output for errors rather than relying
+  only on stage colors. A failed command stops progression to deployment.
+
+The pipeline archives reports/** and deployment/current/** before cleanup.
+Download those artifacts from the build page. The agent workspace is then
+deleted, including its deployed copy. This is a simple local deployment with
+a retained downloadable release, not a long-running server or remote rollout.
+To use it after cleanup, extract the archived release and run python app.py.
+
+6. Complete the report with real evidence
+
+Create evidence_jenkins/ in your submission and save:
+- console-output.txt from the actual Jenkins build;
+- a screenshot showing the build number, SUCCESS and the six stages;
+- a screenshot or exported result showing the seven tests;
+- downloaded coverage, Bandit and deployment artifacts.
+
+In the Word report's final page, replace "Not yet run" fields with your real
+repository URL, Jenkins build URL/number, agent OS/Python, date and result.
+Insert the real stage screenshot and a short console excerpt. Mention any
+changes needed on the Jenkins machine. Do not label evidence_local as Jenkins
+output. If the build fails, fix the cause, push, rebuild and use the final run.
+
+7. Submit
+
+After validation, save the completed report, commit the final files to GitHub,
+and create github_link.txt containing the actual repository URL on one line.
+Upload that text file to Moodle as required by Part 3. Submit the modified
+Jenkinsfile and brief report for Part 4, plus the ZIP if your course requests it.
+The supplied ZIP deliberately excludes .git, virtual environments and caches.
+It includes the original local evidence under evidence_local/ for comparison.
+
+Common fixes
+
+"Jenkinsfile not found": check Script Path, case, repository root and branch.
+"python not found": fix the build agent's service-account PATH and restart
+the agent/service if needed. Python must be installed on that agent.
+"No such DSL method junit": install/enable JUnit, then rerun.
+Checkout denied: verify Git plugin, repository access and SCM credentials.
+Package download denied: configure the agent's proxy or approved package mirror.
+Coverage below 90%: inspect Missing lines and tests; the stage intentionally fails.
+Bandit nonzero status: inspect the JSON finding or scan error and fix the cause;
+do not use --exit-zero to disguise a failed security check.
