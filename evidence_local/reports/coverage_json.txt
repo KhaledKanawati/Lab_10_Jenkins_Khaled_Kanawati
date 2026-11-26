@@ -1,5 +1,0 @@
-LOCAL CHECK: coverage_json
-Command: python -m coverage json --fail-under=0 -o reports/coverage.json
-Exit code: 0
-
-Wrote JSON report to reports/coverage.json

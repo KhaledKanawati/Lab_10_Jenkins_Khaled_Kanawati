@@ -1,0 +1,297 @@
+Started by user unknown or anonymous
+Obtained Jenkinsfile_Khaled_Kanawati from git https://github.com/KhaledKanawati/Lab_10_Jenkins_Khaled_Kanawati.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in C:\ProgramData\Jenkins\.jenkins\workspace\Python-CI-CD
+[Pipeline] {
+[Pipeline] timeout
+Timeout set to expire in 15 min
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Setup)
+[Pipeline] deleteDir
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/KhaledKanawati/Lab_10_Jenkins_Khaled_Kanawati.git
+ > C:\Program Files\Git\cmd\git.exe init C:\ProgramData\Jenkins\.jenkins\workspace\Python-CI-CD # timeout=10
+Fetching upstream changes from https://github.com/KhaledKanawati/Lab_10_Jenkins_Khaled_Kanawati.git
+ > C:\Program Files\Git\cmd\git.exe --version # timeout=10
+ > git --version # 'git version 2.49.0.windows.1'
+ > C:\Program Files\Git\cmd\git.exe fetch --tags --force --progress -- https://github.com/KhaledKanawati/Lab_10_Jenkins_Khaled_Kanawati.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > C:\Program Files\Git\cmd\git.exe config remote.origin.url https://github.com/KhaledKanawati/Lab_10_Jenkins_Khaled_Kanawati.git # timeout=10
+ > C:\Program Files\Git\cmd\git.exe config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > C:\Program Files\Git\cmd\git.exe rev-parse "refs/remotes/origin/main^{commit}" # timeout=10
+Checking out Revision cdbfc82db1565d0123340bb82ba25a45e37eb7b3 (refs/remotes/origin/main)
+ > C:\Program Files\Git\cmd\git.exe config core.sparsecheckout # timeout=10
+ > C:\Program Files\Git\cmd\git.exe checkout -f cdbfc82db1565d0123340bb82ba25a45e37eb7b3 # timeout=10
+Commit message: "Prepare Lab 10 Jenkins pipeline"
+First time build. Skipping changelog.
+[Pipeline] script
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\Python-CI-CD>python -m venv .venv 
+[Pipeline] isUnix
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\Python-CI-CD>".venv\Scripts\python.exe" --version 
+Python 3.11.7
+[Pipeline] isUnix
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\Python-CI-CD>".venv\Scripts\python.exe" -m pip install -r requirements.txt 
+Collecting flake8==7.3.0 (from -r requirements.txt (line 1))
+  Obtaining dependency information for flake8==7.3.0 from https://files.pythonhosted.org/packages/9f/56/13ab06b4f93ca7cac71078fbe37fcea175d3216f31f85c3168a6bbd0bb9a/flake8-7.3.0-py2.py3-none-any.whl.metadata
+  Downloading flake8-7.3.0-py2.py3-none-any.whl.metadata (3.8 kB)
+Collecting pytest==8.4.2 (from -r requirements.txt (line 2))
+  Obtaining dependency information for pytest==8.4.2 from https://files.pythonhosted.org/packages/a8/a4/20da314d277121d6534b3a980b29035dcd51e6744bd79075a6ce8fa4eb8d/pytest-8.4.2-py3-none-any.whl.metadata
+  Downloading pytest-8.4.2-py3-none-any.whl.metadata (7.7 kB)
+Collecting coverage==7.11.3 (from -r requirements.txt (line 3))
+  Obtaining dependency information for coverage==7.11.3 from https://files.pythonhosted.org/packages/94/11/8e7155df53f99553ad8114054806c01a2c0b08f303ea7e38b9831652d83d/coverage-7.11.3-cp311-cp311-win_amd64.whl.metadata
+  Downloading coverage-7.11.3-cp311-cp311-win_amd64.whl.metadata (9.3 kB)
+Collecting bandit==1.8.6 (from -r requirements.txt (line 4))
+  Obtaining dependency information for bandit==1.8.6 from https://files.pythonhosted.org/packages/48/ca/ba5f909b40ea12ec542d5d7bdd13ee31c4d65f3beed20211ef81c18fa1f3/bandit-1.8.6-py3-none-any.whl.metadata
+  Downloading bandit-1.8.6-py3-none-any.whl.metadata (6.9 kB)
+Collecting mccabe<0.8.0,>=0.7.0 (from flake8==7.3.0->-r requirements.txt (line 1))
+  Obtaining dependency information for mccabe<0.8.0,>=0.7.0 from https://files.pythonhosted.org/packages/27/1a/1f68f9ba0c207934b35b86a8ca3aad8395a3d6dd7921c0686e23853ff5a9/mccabe-0.7.0-py2.py3-none-any.whl.metadata
+  Downloading mccabe-0.7.0-py2.py3-none-any.whl.metadata (5.0 kB)
+Collecting pycodestyle<2.15.0,>=2.14.0 (from flake8==7.3.0->-r requirements.txt (line 1))
+  Obtaining dependency information for pycodestyle<2.15.0,>=2.14.0 from https://files.pythonhosted.org/packages/d7/27/a58ddaf8c588a3ef080db9d0b7e0b97215cee3a45df74f3a94dbbf5c893a/pycodestyle-2.14.0-py2.py3-none-any.whl.metadata
+  Downloading pycodestyle-2.14.0-py2.py3-none-any.whl.metadata (4.5 kB)
+Collecting pyflakes<3.5.0,>=3.4.0 (from flake8==7.3.0->-r requirements.txt (line 1))
+  Obtaining dependency information for pyflakes<3.5.0,>=3.4.0 from https://files.pythonhosted.org/packages/c2/2f/81d580a0fb83baeb066698975cb14a618bdbed7720678566f1b046a95fe8/pyflakes-3.4.0-py2.py3-none-any.whl.metadata
+  Downloading pyflakes-3.4.0-py2.py3-none-any.whl.metadata (3.5 kB)
+Collecting colorama>=0.4 (from pytest==8.4.2->-r requirements.txt (line 2))
+  Obtaining dependency information for colorama>=0.4 from https://files.pythonhosted.org/packages/d1/d6/3965ed04c63042e047cb6a3e6ed1a63a35087b6a609aa3a15ed8ac56c221/colorama-0.4.6-py2.py3-none-any.whl.metadata
+  Using cached colorama-0.4.6-py2.py3-none-any.whl.metadata (17 kB)
+Collecting iniconfig>=1 (from pytest==8.4.2->-r requirements.txt (line 2))
+  Obtaining dependency information for iniconfig>=1 from https://files.pythonhosted.org/packages/56/43/4ca9e49d27a1fcf6bece6f6aec0ea46bb9112489b93d4b688fb415457bdb/iniconfig-2.3.1-py3-none-any.whl.metadata
+  Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+Collecting packaging>=20 (from pytest==8.4.2->-r requirements.txt (line 2))
+  Obtaining dependency information for packaging>=20 from https://files.pythonhosted.org/packages/ba/7b/5504f91c9c2733f693d7759e50ede5d27119d4da7e5836c46d3b5ff81d56/packaging-26.4-py3-none-any.whl.metadata
+  Downloading packaging-26.4-py3-none-any.whl.metadata (3.5 kB)
+Collecting pluggy<2,>=1.5 (from pytest==8.4.2->-r requirements.txt (line 2))
+  Obtaining dependency information for pluggy<2,>=1.5 from https://files.pythonhosted.org/packages/40/9e/2b38731e0fc536806f16490e1a12d7f0dc2a1235aa8cc07bcc75416a7daa/pluggy-1.7.0-py3-none-any.whl.metadata
+  Downloading pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+Collecting pygments>=2.7.2 (from pytest==8.4.2->-r requirements.txt (line 2))
+  Obtaining dependency information for pygments>=2.7.2 from https://files.pythonhosted.org/packages/71/46/17f022dd3e953bf20a04a028a21ec746d942f8d2af30fa0f124fa0e6a684/pygments-2.21.0-py3-none-any.whl.metadata
+  Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting PyYAML>=5.3.1 (from bandit==1.8.6->-r requirements.txt (line 4))
+  Obtaining dependency information for PyYAML>=5.3.1 from https://files.pythonhosted.org/packages/7f/c6/ffe94f3159f3543b1ea1702519e1e0a74a67f3a255c286c1f00d51780b82/pyyaml-6.0.4-cp311-cp311-win_amd64.whl.metadata
+  Downloading pyyaml-6.0.4-cp311-cp311-win_amd64.whl.metadata (2.4 kB)
+Collecting stevedore>=1.20.0 (from bandit==1.8.6->-r requirements.txt (line 4))
+  Obtaining dependency information for stevedore>=1.20.0 from https://files.pythonhosted.org/packages/10/78/918aaff2864a8829d061db40acb9da04c89e5c3a01d65932b34432ebd78b/stevedore-5.10.0-py3-none-any.whl.metadata
+  Downloading stevedore-5.10.0-py3-none-any.whl.metadata (2.3 kB)
+Collecting rich (from bandit==1.8.6->-r requirements.txt (line 4))
+  Obtaining dependency information for rich from https://files.pythonhosted.org/packages/82/3b/64d4899d73f91ba49a8c18a8ff3f0ea8f1c1d75481760df8c68ef5235bf5/rich-15.0.0-py3-none-any.whl.metadata
+  Downloading rich-15.0.0-py3-none-any.whl.metadata (18 kB)
+Collecting markdown-it-py>=2.2.0 (from rich->bandit==1.8.6->-r requirements.txt (line 4))
+  Obtaining dependency information for markdown-it-py>=2.2.0 from https://files.pythonhosted.org/packages/c9/31/5f0ac2f1a1c67423c995c731a11cd4ad05d081a2be969d74f868bdb9cc70/markdown_it_py-4.3.0-py3-none-any.whl.metadata
+  Downloading markdown_it_py-4.3.0-py3-none-any.whl.metadata (7.9 kB)
+Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich->bandit==1.8.6->-r requirements.txt (line 4))
+  Obtaining dependency information for mdurl~=0.1 from https://files.pythonhosted.org/packages/b3/38/89ba8ad64ae25be8de66a6d463314cf1eb366222074cfda9ee839c56a4b4/mdurl-0.1.2-py3-none-any.whl.metadata
+  Using cached mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+Downloading flake8-7.3.0-py2.py3-none-any.whl (57 kB)
+   ---------------------------------------- 57.9/57.9 kB 1.0 MB/s eta 0:00:00
+Downloading pytest-8.4.2-py3-none-any.whl (365 kB)
+   ---------------------------------------- 365.8/365.8 kB 1.5 MB/s eta 0:00:00
+Downloading coverage-7.11.3-cp311-cp311-win_amd64.whl (219 kB)
+   ---------------------------------------- 219.9/219.9 kB 1.5 MB/s eta 0:00:00
+Downloading bandit-1.8.6-py3-none-any.whl (133 kB)
+   ---------------------------------------- 133.8/133.8 kB 1.6 MB/s eta 0:00:00
+Using cached colorama-0.4.6-py2.py3-none-any.whl (25 kB)
+Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+Downloading mccabe-0.7.0-py2.py3-none-any.whl (7.3 kB)
+Downloading packaging-26.4-py3-none-any.whl (140 kB)
+   ---------------------------------------- 140.0/140.0 kB 1.7 MB/s eta 0:00:00
+Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
+Downloading pycodestyle-2.14.0-py2.py3-none-any.whl (31 kB)
+Downloading pyflakes-3.4.0-py2.py3-none-any.whl (63 kB)
+   ---------------------------------------- 63.6/63.6 kB 1.1 MB/s eta 0:00:00
+Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+   ---------------------------------------- 1.3/1.3 MB 1.5 MB/s eta 0:00:00
+Downloading pyyaml-6.0.4-cp311-cp311-win_amd64.whl (161 kB)
+   ---------------------------------------- 161.8/161.8 kB 1.6 MB/s eta 0:00:00
+Downloading stevedore-5.10.0-py3-none-any.whl (56 kB)
+   ---------------------------------------- 56.8/56.8 kB 1.5 MB/s eta 0:00:00
+Downloading rich-15.0.0-py3-none-any.whl (310 kB)
+   ---------------------------------------- 310.7/310.7 kB 1.5 MB/s eta 0:00:00
+Downloading markdown_it_py-4.3.0-py3-none-any.whl (96 kB)
+   ---------------------------------------- 97.0/97.0 kB 1.4 MB/s eta 0:00:00
+Using cached mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+Installing collected packages: stevedore, PyYAML, pygments, pyflakes, pycodestyle, pluggy, packaging, mdurl, mccabe, iniconfig, coverage, colorama, pytest, markdown-it-py, flake8, rich, bandit
+Successfully installed PyYAML-6.0.4 bandit-1.8.6 colorama-0.4.6 coverage-7.11.3 flake8-7.3.0 iniconfig-2.3.1 markdown-it-py-4.3.0 mccabe-0.7.0 mdurl-0.1.2 packaging-26.4 pluggy-1.7.0 pycodestyle-2.14.0 pyflakes-3.4.0 pygments-2.21.0 pytest-8.4.2 rich-15.0.0 stevedore-5.10.0
+
+[notice] A new release of pip is available: 23.2.1 -> 26.3
+[notice] To update, run: C:\ProgramData\Jenkins\.jenkins\workspace\Python-CI-CD\.venv\Scripts\python.exe -m pip install --upgrade pip
+[Pipeline] isUnix
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\Python-CI-CD>".venv\Scripts\python.exe" -c "from pathlib import Path; Path('reports').mkdir(exist_ok=True)" 
+[Pipeline] isUnix
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\Python-CI-CD>".venv\Scripts\python.exe" -m pip freeze  1>reports/installed-packages.txt 
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Lint)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\Python-CI-CD>".venv\Scripts\python.exe" -m flake8 app.py deploy.py tests run_checks.py --tee --output-file reports/flake8.txt 
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\Python-CI-CD>".venv\Scripts\python.exe" -m pytest -v --junitxml=reports/junit.xml 
+============================= test session starts =============================
+platform win32 -- Python 3.11.7, pytest-8.4.2, pluggy-1.7.0 -- C:\ProgramData\Jenkins\.jenkins\workspace\Python-CI-CD\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\ProgramData\Jenkins\.jenkins\workspace\Python-CI-CD
+configfile: pytest.ini
+testpaths: tests
+collecting ... collected 7 items
+
+tests/test_app.py::TestApp::test_empty_name PASSED                       [ 14%]
+tests/test_app.py::TestApp::test_greet PASSED                            [ 28%]
+tests/test_app.py::TestApp::test_other_name PASSED                       [ 42%]
+tests/test_app.py::TestApp::test_script_entry_point PASSED               [ 57%]
+tests/test_deploy.py::TestDeploy::test_failed_smoke_check_blocks_release_manifest PASSED [ 71%]
+tests/test_deploy.py::TestDeploy::test_release_files_and_manifest PASSED [ 85%]
+tests/test_deploy.py::TestDeploy::test_repeated_deployment_and_build_metadata PASSED [100%]
+
+- generated xml file: C:\ProgramData\Jenkins\.jenkins\workspace\Python-CI-CD\reports\junit.xml -
+============================== 7 passed in 0.13s ==============================
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Coverage)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\Python-CI-CD>".venv\Scripts\python.exe" -m coverage run -m pytest -v 
+============================= test session starts =============================
+platform win32 -- Python 3.11.7, pytest-8.4.2, pluggy-1.7.0 -- C:\ProgramData\Jenkins\.jenkins\workspace\Python-CI-CD\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\ProgramData\Jenkins\.jenkins\workspace\Python-CI-CD
+configfile: pytest.ini
+testpaths: tests
+collecting ... collected 7 items
+
+tests/test_app.py::TestApp::test_empty_name PASSED                       [ 14%]
+tests/test_app.py::TestApp::test_greet PASSED                            [ 28%]
+tests/test_app.py::TestApp::test_other_name PASSED                       [ 42%]
+tests/test_app.py::TestApp::test_script_entry_point PASSED               [ 57%]
+tests/test_deploy.py::TestDeploy::test_failed_smoke_check_blocks_release_manifest PASSED [ 71%]
+tests/test_deploy.py::TestDeploy::test_release_files_and_manifest PASSED [ 85%]
+tests/test_deploy.py::TestDeploy::test_repeated_deployment_and_build_metadata PASSED [100%]
+
+============================== 7 passed in 0.12s ==============================
+[Pipeline] isUnix
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\Python-CI-CD>".venv\Scripts\python.exe" -m coverage html --fail-under=0 
+Wrote HTML report to reports/htmlcov\index.html
+[Pipeline] isUnix
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\Python-CI-CD>".venv\Scripts\python.exe" -m coverage xml --fail-under=0 
+Wrote XML report to reports/coverage.xml
+[Pipeline] isUnix
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\Python-CI-CD>".venv\Scripts\python.exe" -m coverage json -o reports/coverage.json --fail-under=0 
+Wrote JSON report to reports/coverage.json
+[Pipeline] isUnix
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\Python-CI-CD>".venv\Scripts\python.exe" -m coverage report -m --fail-under=90 
+Name        Stmts   Miss Branch BrPart   Cover   Missing
+--------------------------------------------------------
+app.py          4      0      2      0 100.00%
+deploy.py      24      1      4      1  92.86%   42
+--------------------------------------------------------
+TOTAL          28      1      6      1  94.12%
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Security Scan)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\Python-CI-CD>".venv\Scripts\python.exe" -m bandit app.py deploy.py -f json -o reports/bandit.json 
+[main]	INFO	profile include tests: None
+[main]	INFO	profile exclude tests: None
+[main]	INFO	cli include tests: None
+[main]	INFO	cli exclude tests: None
+[json]	INFO	JSON output written to file: reports/bandit.json
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\Python-CI-CD>".venv\Scripts\python.exe" deploy.py 
+Deployed to C:\ProgramData\Jenkins\.jenkins\workspace\Python-CI-CD\deployment\current
+Hello, World from Khaled Kanawati!
+[Pipeline] isUnix
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\Python-CI-CD>".venv\Scripts\python.exe" deployment/current/app.py 
+Hello, World from Khaled Kanawati!
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] fileExists
+[Pipeline] junit
+Recording test results
+[Checks API] No suitable checks publisher found.
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] archiveArtifacts
+Archiving artifacts
+Recording fingerprints
+[Pipeline] deleteDir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // timeout
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS

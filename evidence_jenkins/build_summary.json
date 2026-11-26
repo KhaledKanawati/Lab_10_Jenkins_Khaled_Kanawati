@@ -1,0 +1,38 @@
+{
+  "repository": "https://github.com/KhaledKanawati/Lab_10_Jenkins_Khaled_Kanawati",
+  "tested_commit": "cdbfc82db1565d0123340bb82ba25a45e37eb7b3",
+  "job": "Python-CI-CD",
+  "build_number": 1,
+  "status": "SUCCESS",
+  "test_timestamp": "2026-11-26T23:08:29.205480+02:00",
+  "agent_os": "Windows",
+  "agent_hostname": "mazen",
+  "python": "3.11.7",
+  "stages": [
+    "Setup",
+    "Lint",
+    "Test",
+    "Coverage",
+    "Security Scan",
+    "Deploy"
+  ],
+  "tests": {
+    "passed": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "combined_line_and_branch_coverage_percent": 94.12,
+  "bandit_findings": 0,
+  "bandit_errors": 0,
+  "deployed_app_sha256": "c38305dafa80597c446e7c707211eddd8d5420d0ba1ee752a0cad6db1034560f",
+  "source_comparison": "Matches GitHub source after normalizing Windows CRLF line endings",
+  "manifest_commit_field": "local",
+  "commit_evidence": "SCM checkout revision in console-output.txt; manifest retains local fallback",
+  "build_url": null,
+  "evidence_sha256": {
+    "console-output.txt": "7bf4a74ee7c8dee669c702e9d4a086e9715a81028d64870ac676aa616a9f44f5",
+    "archive.zip": "d126617dd34f5c57ff00ac598f94a7e9b5fdcfa1ec90959bb279e8e98b1b4c20",
+    "jenkins-tests.png": "9343039b3e27e1561b0323406b8e7a06a268ca9ca9778736fdd17ae08db9001d"
+  }
+}

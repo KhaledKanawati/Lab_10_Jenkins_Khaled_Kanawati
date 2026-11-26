@@ -1,6 +1,0 @@
-LOCAL CHECK: deploy
-Command: python deploy.py
-Exit code: 0
-
-Deployed to C:\Users\user\Documents\Codex\2026-11-22\can-x20\outputs\lab10_Khaled_Kanawati\jenkins_project\deployment\current
-Hello, World from Khaled Kanawati!

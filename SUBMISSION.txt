@@ -1,0 +1,9 @@
+LAB 10 SUBMISSION CONTENTS
+
+The repository link has been submitted on Moodle. This repository contains
+the tested Jenkinsfile, the Python project, the completed Word report, and
+the real Jenkins console output, screenshot and archived build artifacts.
+
+Jenkins validation: Python-CI-CD build #1 finished SUCCESS on 26 November 2026.
+The report records the tested source commit. Later documentation and evidence
+updates do not change the Python application or Jenkinsfile used by that run.
